@@ -6,7 +6,7 @@ class Personaje extends Model { }
 
 Personaje.init({
     // Model attributes are defined here
-    id:{
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -34,14 +34,10 @@ Personaje.init({
 });
 
 
-//un personaje va a tener muchas peliculas
-//Se añade una clave personajeId a la tabla peliculas
-//Personaje.hasMany(Pelicula_Serie);--no sirvio
-
 //el personaje pertenezca a varias peliculas
 //crea una nueva base de datos llamada personajes_peliculas
-Personaje.belongsToMany(Pelicula_Serie, { through: "personajes_peliculas"});
-Pelicula_Serie.belongsToMany(Personaje, { through: "personajes_peliculas"});
+Personaje.belongsToMany(Pelicula_Serie, { through: "personajes_peliculas" });
+Pelicula_Serie.belongsToMany(Personaje, { through: "personajes_peliculas" });
 
 
 module.exports = Personaje;

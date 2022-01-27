@@ -9,7 +9,7 @@ const sgMail = require('@sendgrid/mail');
 
 const { check, validationResult } = require('express-validator');
 sgMail.setApiKey(process.env.API_KEY_SENDGRID);
-const sendMail = async(msg) => {
+const sendMail = async (msg) => {
     try {
         await sgMail.send(msg);
         console.log("Mensaje enviado correctamente");
@@ -45,18 +45,18 @@ router.post('/register', [
 
 });
 
-router.post('/login', async (req,res) => {
-    const user = await User.findOne({ where : { email: req.body.email} });
+router.post('/login', async (req, res) => {
+    const user = await User.findOne({ where: { email: req.body.email } });
 
     if (user) {
         const iguales = bcrypt.compareSync(req.body.password, user.password);
         if (iguales) {
-            res.json({succes: createToken(user) });
+            res.json({ succes: createToken(user) });
         } else {
-            res.json({ error: 'Error en usuario y/o contraseña'});
+            res.json({ error: 'Error en usuario y/o contraseña' });
         }
     } else {
-        res.json({ error: 'Error en usuario y/o contraseña'});
+        res.json({ error: 'Error en usuario y/o contraseña' });
     }
 });
 

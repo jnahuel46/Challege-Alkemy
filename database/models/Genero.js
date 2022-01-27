@@ -6,7 +6,7 @@ class Genero extends Model { }
 
 Genero.init({
     // Model attributes are defined here
-    id:{
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true

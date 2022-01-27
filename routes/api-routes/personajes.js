@@ -3,24 +3,48 @@ const Personaje = require('../../database/models/Personaje');
 
 const router = require('express').Router();
 
-
+//LISTAR TODOS LOS PERSONAJES
 router.get('/', async (req, res) => {
-
-    /*Personaje.findAll({
+    const personajes = await Personaje.findAll({
         attributes: ['nombre', 'imagen']
-    }).then(personajes => res.json(personajes));
-    const personajes = await Personaje.findAll(req.body);
-    res.json(personajes);*/
-    await Personaje.findAll({
-        include: {
-            model: Pelicula_Serie
-        }
-    }).then(personajes => res.json(personajes));
+    });
+    res.json(personajes);
 });
 
+//LISTAR PERSONAJE CON DETALLE
+router.get('/detalle/:personajeId', async (req, res) => {
+    const personajes = await Personaje.findAll({
+        where: { id: req.params.personajeId },
+        attributes: ['nombre', 'imagen', 'edad', 'peso', 'historia'],
+        include: [{ model: Pelicula_Serie, attributes: ['titulo', 'imagen'] }]
+    })
+    res.json(personajes);
+});
 
+//FILTRO POR NOMBRE
+router.get('/filtro/nombre', async (req, res) => {
 
+    const { nombre } = req.query;
+    const personaje = await Personaje.findOne({ where: { nombre: nombre } });
+    res.json(personaje);
+});
+//FILTRO POR EDAD
+router.get('/filtro/age', async (req, res) => {
 
+    const { age } = req.query;
+    const personaje = await Personaje.findOne({ where: { edad: age } });
+    res.json(personaje);
+});
+
+//FILTRO POR PESO
+router.get('/filtro/peso', async (req, res) => {
+
+    const { peso } = req.query;
+    const personaje = await Personaje.findOne({ where: { peso: peso } });
+    res.json(personaje);
+});
+
+//CREAR PERSONAJE
 router.post('/', async (req, res) => {
 
     const personaje = await Personaje.create(req.body);
@@ -28,6 +52,7 @@ router.post('/', async (req, res) => {
 
 });
 
+//ACTUALIZAR PERSONAJE
 router.put('/:personajeId', async (req, res) => {
 
     await Personaje.update(req.body, {
@@ -37,6 +62,7 @@ router.put('/:personajeId', async (req, res) => {
 
 });
 
+//BORRAR PERSONAJE
 router.delete('/:personajeId', async (req, res) => {
 
     await Personaje.destroy({

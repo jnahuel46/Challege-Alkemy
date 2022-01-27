@@ -6,7 +6,7 @@ class Pelicula_Serie extends Model { }
 
 Pelicula_Serie.init({
     // Model attributes are defined here
-    id:{
+    id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
@@ -17,9 +17,10 @@ Pelicula_Serie.init({
     titulo: {
         type: DataTypes.STRING,
     },
-    fecha_creacion: { 
-        type: DataTypes.DATE, 
-        defaultValue: DataTypes.NOW },
+    fecha_creacion: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
+    },
     calificacion: {
         type: DataTypes.INTEGER,
     },
