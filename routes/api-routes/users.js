@@ -3,10 +3,12 @@ const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const moment = require('moment');
 const jwt = require('jwt-simple');
+require('dotenv').config();
 const sgMail = require('@sendgrid/mail');
 
+
 const { check, validationResult } = require('express-validator');
-sgMail.setApiKey('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')
+sgMail.setApiKey(process.env.API_KEY_SENDGRID);
 const sendMail = async(msg) => {
     try {
         await sgMail.send(msg);
@@ -36,7 +38,7 @@ router.post('/register', [
 
     sendMail({
         to: req.body.email,
-        from: 'jnahuel46@gmail.com',
+        from: 'shere_nahuel@hotmail.com',
         subject: 'Bienvenido/a',
         text: 'Bienvenido a la REST API de Disney'
     });
