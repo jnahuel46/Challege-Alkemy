@@ -20,3 +20,4 @@ Y Login de usuario en  '/auth/login'. Le sigue la creacion de token para habilit
 - Casi la totalidad de los puntos requeridos fue completado;
 - Falto filtrado por pelicula y tests;
 - La aplicacion se levanta en un entorno local en puerto 3000;
+## PARA TODAS LAS PETICIONES HAY QUE USAR EL USER-TOKEN EN LOS HEADERS ##
