@@ -38,7 +38,7 @@ router.post('/register', [
 
     sendMail({
         to: req.body.email,
-        from: 'shere_nahuel@hotmail.com',
+        from: 'shere_nahuel@hotmail.com',//ingresar mail registrado en sendgrid
         subject: 'Bienvenido/a',
         text: 'Bienvenido a la REST API de Disney'
     });
