@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes, Model } = require('sequelize');
-const sequelize = require('../db');
+const sequelize = require('../database/db');
 const Pelicula_Serie = require('./Pelicula_Serie');
 
 class Personaje extends Model { }

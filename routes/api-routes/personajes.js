@@ -1,14 +1,11 @@
-const { validarAdminRol, validarCampos } = require('../../database/middlewares/middlewares');
-const Pelicula_Serie = require('../../database/models/Pelicula_Serie');
-const Personaje = require('../../database/models/Personaje');
+const { validarAdminRol, validarCampos } = require('../../middlewares/middlewares');
+const Pelicula_Serie = require('../../models/Pelicula_Serie');
+const Personaje = require('../../models/Personaje');
 
 const router = require('express').Router();
 
 //LISTAR TODOS LOS PERSONAJES
-router.get('/', [
-    validarAdminRol,
-    validarCampos
-], async (req, res) => {
+router.get('/', async (req, res) => {
     const personajes = await Personaje.findAll({
         attributes: ['nombre', 'imagen']
     });

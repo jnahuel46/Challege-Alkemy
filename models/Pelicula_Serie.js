@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes, Model, DATE } = require('sequelize');
-const sequelize = require('../db');
+const sequelize = require('../database/db');
 const Genero = require('./Genero');
 
 class Pelicula_Serie extends Model { }

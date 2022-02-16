@@ -1,7 +1,7 @@
 const jwt = require('jwt-simple');
 const moment = require('moment');
 const { validationResult } = require('express-validator');
-const User = require('../../database/models/User');
+const User = require('../models/User');
 
 
 

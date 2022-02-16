@@ -1,6 +1,6 @@
-const { validarAdminRol, validarCampos } = require('../../database/middlewares/middlewares');
-const Genero = require('../../database/models/Genero');
-const Pelicula_Serie = require('../../database/models/Pelicula_Serie');
+const { validarAdminRol, validarCampos } = require('../../middlewares/middlewares');
+const Genero = require('../../models/Genero');
+const Pelicula_Serie = require('../../models/Pelicula_Serie');
 
 
 const router = require('express').Router();

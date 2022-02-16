@@ -21,3 +21,7 @@ Y Login de usuario en  '/auth/login'. Le sigue la creacion de token para habilit
 - Falto filtrado por pelicula y tests;
 - La aplicacion se levanta en un entorno local en puerto 3000;
 ## PARA TODAS LAS PETICIONES HAY QUE USAR EL USER-TOKEN EN LOS HEADERS ##
+
+
+## AÑADIENDO FUNCIONALIDAD ##
+- Devolver un 4XX y un mensaje en el caso de no tener permiso para el acceso a rutas.(YA SEA POR ERROR EN EL JWT O EN EL ROL DEL USUARIO, METODOS POST, PUT Y DELETE NECESITAN PERMISOS DE ADMIN_ROL);

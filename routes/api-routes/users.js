@@ -1,4 +1,4 @@
-const User = require('../../database/models/User');
+const User = require('../../models/User');
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const moment = require('moment');
@@ -6,7 +6,7 @@ const jwt = require('jwt-simple');
 require('dotenv').config();
 //const sgMail = require('@sendgrid/mail');
 const { check } = require('express-validator');
-const { validarCampos } = require('../../database/middlewares/middlewares');
+const { validarCampos } = require('../../middlewares/middlewares');
 
 
 /*sgMail.setApiKey(process.env.API_KEY_SENDGRID);

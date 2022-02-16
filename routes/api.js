@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
 
-const { checkToken } = require('../database/middlewares/middlewares');
+const { checkToken } = require('../middlewares/middlewares');
 const apiPersonajesRouter = require('./api-routes/personajes');
 const apiUsersRouter = require('./api-routes/users');
 const apiPeliculasRouter = require('./api-routes/peliculas');
