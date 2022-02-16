@@ -1,10 +1,14 @@
+const { validarAdminRol, validarCampos } = require('../../database/middlewares/middlewares');
 const Pelicula_Serie = require('../../database/models/Pelicula_Serie');
 const Personaje = require('../../database/models/Personaje');
 
 const router = require('express').Router();
 
 //LISTAR TODOS LOS PERSONAJES
-router.get('/', async (req, res) => {
+router.get('/', [
+    validarAdminRol,
+    validarCampos
+], async (req, res) => {
     const personajes = await Personaje.findAll({
         attributes: ['nombre', 'imagen']
     });
@@ -45,7 +49,10 @@ router.get('/filtro/peso', async (req, res) => {
 });
 
 //CREAR PERSONAJE
-router.post('/', async (req, res) => {
+router.post('/', [
+    validarAdminRol,
+    validarCampos
+], async (req, res) => {
 
     const personaje = await Personaje.create(req.body);
     res.json(personaje);
@@ -53,7 +60,10 @@ router.post('/', async (req, res) => {
 });
 
 //ACTUALIZAR PERSONAJE
-router.put('/:personajeId', async (req, res) => {
+router.put('/:personajeId', [
+    validarAdminRol,
+    validarCampos
+], async (req, res) => {
 
     await Personaje.update(req.body, {
         where: { id: req.params.personajeId }
@@ -63,7 +73,10 @@ router.put('/:personajeId', async (req, res) => {
 });
 
 //BORRAR PERSONAJE
-router.delete('/:personajeId', async (req, res) => {
+router.delete('/:personajeId', [
+    validarAdminRol,
+    validarCampos
+], async (req, res) => {
 
     await Personaje.destroy({
         where: { id: req.params.personajeId }

@@ -4,11 +4,12 @@ const bcrypt = require('bcryptjs');
 const moment = require('moment');
 const jwt = require('jwt-simple');
 require('dotenv').config();
-const sgMail = require('@sendgrid/mail');
+//const sgMail = require('@sendgrid/mail');
+const { check } = require('express-validator');
+const { validarCampos } = require('../../database/middlewares/middlewares');
 
 
-const { check, validationResult } = require('express-validator');
-sgMail.setApiKey(process.env.API_KEY_SENDGRID);
+/*sgMail.setApiKey(process.env.API_KEY_SENDGRID);
 const sendMail = async (msg) => {
     try {
         await sgMail.send(msg);
@@ -19,29 +20,25 @@ const sendMail = async (msg) => {
             console.error(error.response.body);
         }
     }
-};
+};*/
 
 router.post('/register', [
     check('username', 'El nombre de usuario es obligatorio').not().isEmpty(),
     check('password', 'El password es obligatorio').not().isEmpty(),
-    check('email', 'El email debe estar correcto').isEmail()
+    check('email', 'El email debe estar correcto').isEmail(),
+    validarCampos
 ], async (req, res) => {
-
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(422).json({ errores: errors.array() });
-    }
 
     req.body.password = bcrypt.hashSync(req.body.password, 10);
     const user = await User.create(req.body);
     res.json(user);
 
-    sendMail({
+    /*sendMail({
         to: req.body.email,
         from: 'shere_nahuel@hotmail.com',//ingresar mail registrado en sendgrid
         subject: 'Bienvenido/a',
         text: 'Bienvenido a la REST API de Disney'
-    });
+    });*/
 
 });
 
@@ -53,10 +50,10 @@ router.post('/login', async (req, res) => {
         if (iguales) {
             res.json({ succes: createToken(user) });
         } else {
-            res.json({ error: 'Error en usuario y/o contraseña' });
+            res.status(401).json({ error: 'Error en usuario y/o contraseña' });
         }
     } else {
-        res.json({ error: 'Error en usuario y/o contraseña' });
+        res.status(401).json({ error: 'Error en usuario y/o contraseña' });
     }
 });
 

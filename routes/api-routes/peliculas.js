@@ -1,3 +1,4 @@
+const { validarAdminRol, validarCampos } = require('../../database/middlewares/middlewares');
 const Pelicula_Serie = require('../../database/models/Pelicula_Serie');
 const Personaje = require('../../database/models/Personaje');
 
@@ -54,14 +55,20 @@ router.get('/filtro/order', async (req, res) => {//order=ASC | DESC
 });
 
 //CREAR PELICULA
-router.post('/', async (req, res) => {
+router.post('/',[
+    validarAdminRol,
+    validarCampos
+], async (req, res) => {
 
     const peliculas = await Pelicula_Serie.create(req.body);
     res.json(peliculas);
 });
 
 //ACTUALIZAR PELICULA
-router.put('/:peliculaId', async (req, res) => {
+router.put('/:peliculaId',[
+    validarAdminRol,
+    validarCampos
+], async (req, res) => {
 
     await Pelicula_Serie.update(req.body, {
         where: { id: req.params.peliculaId }
@@ -70,7 +77,10 @@ router.put('/:peliculaId', async (req, res) => {
 });
 
 //BORRAR PELICULA
-router.delete('/:peliculaId', async (req, res) => {
+router.delete('/:peliculaId',[
+    validarAdminRol,
+    validarCampos
+], async (req, res) => {
 
     await Pelicula_Serie.destroy({
         where: { id: req.params.peliculaId }

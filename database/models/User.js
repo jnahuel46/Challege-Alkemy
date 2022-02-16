@@ -14,6 +14,10 @@ User.init({
     type: DataTypes.STRING,
     allowNull: false
   },
+  rol: {
+    type: DataTypes.ENUM(['ADMIN_ROL', 'USER_ROL']),
+    defaultValue: 'ADMIN_ROL'
+  },
   email: {
     type: DataTypes.STRING
   },

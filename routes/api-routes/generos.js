@@ -1,3 +1,4 @@
+const { validarAdminRol, validarCampos } = require('../../database/middlewares/middlewares');
 const Genero = require('../../database/models/Genero');
 const Pelicula_Serie = require('../../database/models/Pelicula_Serie');
 
@@ -17,14 +18,20 @@ router.get('/', async (req, res) => {
 
 
 //CREAR GENERO
-router.post('/', async (req, res) => {
+router.post('/',[
+    validarAdminRol,
+    validarCampos
+], async (req, res) => {
 
     const generos = await Genero.create(req.body);
     res.json(generos);
 });
 
 //ACTUALIZAR GENERO
-router.put('/:generoId', async (req, res) => {
+router.put('/:generoId',[
+    validarAdminRol,
+    validarCampos
+], async (req, res) => {
 
     await Genero.update(req.body, {
         where: { id: req.params.generoId }
@@ -33,7 +40,10 @@ router.put('/:generoId', async (req, res) => {
 });
 
 //BORRAR GENERO
-router.delete('/:generoId', async (req, res) => {
+router.delete('/:generoId',[
+    validarAdminRol,
+    validarCampos
+], async (req, res) => {
 
     await Genero.destroy({
         where: { id: req.params.generoId }
