@@ -1,54 +1,29 @@
+const { generoGet, generoPost, generoPut, generoDelete } = require('../../controllers/generos-controller');
 const { validarAdminRol, validarCampos } = require('../../middlewares/middlewares');
-const Genero = require('../../models/Genero');
-const Pelicula_Serie = require('../../models/Pelicula_Serie');
 
 
 const router = require('express').Router();
 
 
-router.get('/', async (req, res) => {
-
-    Genero.findAll({
-        include: {
-            model: Pelicula_Serie,
-            attributes: ['titulo']
-        }
-    }).then(generos => res.json(generos));
-});
+router.get('/', generoGet);
 
 
 //CREAR GENERO
-router.post('/',[
+router.post('/', [
     validarAdminRol,
     validarCampos
-], async (req, res) => {
-
-    const generos = await Genero.create(req.body);
-    res.json(generos);
-});
+], generoPost);
 
 //ACTUALIZAR GENERO
-router.put('/:generoId',[
+router.put('/:generoId', [
     validarAdminRol,
     validarCampos
-], async (req, res) => {
-
-    await Genero.update(req.body, {
-        where: { id: req.params.generoId }
-    });
-    res.json({ success: 'Se ha modificado' });
-});
+], generoPut);
 
 //BORRAR GENERO
-router.delete('/:generoId',[
+router.delete('/:generoId', [
     validarAdminRol,
     validarCampos
-], async (req, res) => {
-
-    await Genero.destroy({
-        where: { id: req.params.generoId }
-    });
-    res.json({ success: 'Se ha eliminado' });
-});
+], generoDelete);
 
 module.exports = router;

@@ -11,7 +11,6 @@ router.use('/generos', checkToken, apiGenerosRouter);
 router.use('/movies', checkToken, apiPeliculasRouter);
 router.use('/characters', checkToken, apiPersonajesRouter);
 router.use('/auth', apiUsersRouter);
-
 module.exports = router;
 
 
